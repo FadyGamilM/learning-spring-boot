@@ -2,6 +2,7 @@ package com.backend;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
@@ -33,6 +34,17 @@ public class Main {
     @GetMapping("api/v1/customers")
     public List<Customer> GetCustomers() {
         return customersDb;
+    }
+
+    @GetMapping("/api/v1/customers/{customerId}")
+    public Customer GetCustomerById (@PathVariable("customerId") Integer customerId){
+        var customer = customersDb
+                .stream()
+                .filter(c -> c.id == customerId)
+                .findFirst()
+                .orElseThrow(()-> new IllegalArgumentException("no customer with this id"));
+
+        return customer;
     }
 
     @GetMapping("/")
