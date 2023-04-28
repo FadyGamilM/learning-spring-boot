@@ -1,0 +1,24 @@
+services:
+  db:
+    container_name: springpostgres
+    image: postgres:14
+    environment:
+      POSTGRES_USER: backend_with_spring
+      POSTGRES_PASSWORD: backend_with_spring
+      PGDATA: /data/postgres
+    volumes:
+      - db:/data/postgres
+    ports:
+      - "1592:5432"
+    networks:
+      - db
+    restart: unless-stopped
+
+networks:
+  db:
+    driver: bridge
+
+volumes:
+    db:
+
+
