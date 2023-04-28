@@ -2,11 +2,13 @@ package com.backend.customer.repositories;
 
 import com.backend.customer.abstractions.CustomerDao;
 import com.backend.customer.models.Customer;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class LocalCustomerDataAccess implements CustomerDao {
     // Local DB
     private static List<Customer> CustomerDB = new ArrayList<Customer>();

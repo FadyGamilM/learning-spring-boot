@@ -2,7 +2,10 @@ package com.backend.customer.services;
 import java.util.List;
 import com.backend.customer.models.Customer;
 import com.backend.customer.repositories.LocalCustomerDataAccess;
+import com.backend.exception.ResourceNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CustomerService {
     private final LocalCustomerDataAccess _customerDB;
 
@@ -24,6 +27,6 @@ public class CustomerService {
                             customer.getName(),
                             customer.getEmail(),
                             customer.getPassword()))
-                .orElseThrow(() -> new IllegalArgumentException("no customer with given id"));
+                .orElseThrow(() -> new ResourceNotFoundException("no customer with given id"));
     }
 }
